@@ -18,28 +18,40 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         changeColorButton.layer.cornerRadius = 10
+
         changeColorButton.configuration = setupButton(with: "START")
+      
         
         setupViewToCircle(redView, color: .red)
         setupViewToCircle(yellowView, color: .yellow)
         setupViewToCircle(greenView, color: .green)
         
-        selectLight(changeColorButton)
+        if redView.alpha == 1 {
+            
+        }
+        }
+    
+    @IBAction func selectLightButton(_ sender: UIView) {
+        changeColorButton.configuration = setupButton(with: "NEXT")
         
-    }
-
-
-    @IBAction func selectLight(_ sender: UIButton) {
-        if  changeColorButton.currentTitle == "START" {
+        switch sender{
+        case redView:
+            redView.alpha = 0.33
+            yellowView.alpha = 1
+        case yellowView:
+            yellowView.alpha = 0.33
+            greenView.alpha = 1
+        case greenView:
+            greenView.alpha = 0.33
+            redView.alpha = 1
+        default:
             redView.alpha = 1
         }
-        
-        
-    }
+            }
     
     private func setupViewToCircle (_ view: UIView, color: UIColor) {
         
-        view.layer.cornerRadius = view.layer.bounds.width/2
+        view.layer.cornerRadius = view.layer.bounds.height * 0.5
         view.clipsToBounds = true
         view.backgroundColor = color
         view.alpha = 0.33
