@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet var greenView: UIView!
     @IBOutlet var changeColorButton: UIButton!
     
-    var light = "red"
+    var counter = 0
 
     override func viewDidLoad() {
         
@@ -33,22 +33,15 @@ class ViewController: UIViewController {
     @IBAction func selectLightButton(_ sender: UIView) {
         changeColorButton.configuration = setupButton(with: "NEXT")
                 
-        switch light {
-        case "red":
-            redView.alpha = 1
-            greenView.alpha = 0.33
-            light = "yellow"
-        case "yellow":
-            yellowView.alpha = 1
-            redView.alpha = 0.33
-            light = "green"
-        case "green":
-            yellowView.alpha = 0.33
-            greenView.alpha = 1
-            light = "red"
-        default:
-            break
+        let views = [redView, yellowView, greenView]
+        
+        for view in views {
+            view?.alpha = 0.33
         }
+        
+        let index = counter % 3
+        views[index]?.alpha = 1
+        counter += 1
     }
 
     private func setupViewToCircle (_ view: UIView, color: UIColor) {
